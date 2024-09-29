@@ -4,6 +4,7 @@ const api = 'http://localhost:5678/api/';
 const gallery = document.querySelector('.gallery');
 // vider la galery
 gallery.innerHTML = '';
+
 // recuperrer les donners de l'api
 async function getProjects() {
   const reponse = await fetch(api + 'works');
@@ -37,7 +38,33 @@ for (let i = 0; i < tri.length; i++) {
 console.log(divtri);
 
 // recuperer la liste des button et leur mettre leur contenu
+
 let listebutton = document.querySelectorAll('#tri button');
 for (let i = 0; i < listebutton.length; i++) {
   listebutton[i].textContent = tri[i];
+  listebutton[i].class = tri[i];
+  console.log(listebutton);
+  // listebutton[i].addEventListener('click', function () {
+  //   createGallery(projects, (id = i - 1));
+  // });
 }
+async function getTri() {
+  const reponse = await fetch(api + 'works');
+  const projects = await reponse.json();
+  createGallery(projects);
+  for (let i = 0; i < listebutton.length; i++) {
+    listebutton[i].addEventListener('click', function () {
+      createGallery(projects, (id = i));
+      console.log(createGallery);
+    });
+  }
+}
+getTri();
+
+// recuperer la liste des id
+
+// let triObjet = document.querySelector('.Objets');
+// console.log(triObjet);
+// triObjet.addEventListener('click', function () {
+//   console.log('vous avez cliquer sur le boutton objets');
+// });

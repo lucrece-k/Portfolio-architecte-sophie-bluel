@@ -210,13 +210,33 @@ li:hover {
 #tri button {
   border: 1px solid #1d6154;
   color: #1d6154;
+  background-color: white;
   border-radius: 60px;
-  padding: 9px 15px;
+  padding-top: 9px;
+  padding-bottom: 9px;
   margin-bottom: 51px;
+  margin-top: 18px;
   font-size: 16px;
   font-weight: 700;
   font-family: 'Syne';
 }
+#tri button:first-child {
+  padding-right: 30px;
+  padding-left: 28px;
+}
+#tri button:nth-child(2) {
+  padding-right: 22px;
+  padding-left: 20px;
+}
+#tri button:nth-child(3) {
+  padding-right: 15px;
+  padding-left: 14px;
+}
+#tri button:nth-child(4) {
+  padding-right: 11px;
+  padding-left: 9px;
+}
+
 #tri button:hover {
   color: white;
   background-color: #1d6154;
