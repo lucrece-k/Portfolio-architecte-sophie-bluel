@@ -1,5 +1,3 @@
-// import { forEach } from 'lodash';
-
 // connextion a l'api
 const api = 'http://localhost:5678/api/';
 // recuperer l'emplacement de la gallery dans DOM
