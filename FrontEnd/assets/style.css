@@ -310,3 +310,43 @@ footer nav ul {
   justify-content: flex-end;
   margin: 2em;
 }
+
+/* ***********************************media queries tablette **************************************************/
+@media (max-width: 1024px) {
+  header {
+    margin: 50px 30px;
+  }
+  #introduction {
+    margin-right: 60px;
+  }
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+/* ***********************************media queries mobile ****************************************************/
+@media (max-width: 767px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  #introduction {
+    flex-direction: column;
+  }
+  #introduction article {
+    padding: 0 20px;
+  }
+  #introduction figure {
+    margin-bottom: 10px;
+  }
+  #tri {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  #tri button {
+    margin: 0;
+  }
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
