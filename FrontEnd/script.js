@@ -1,20 +1,49 @@
-// connextion a l'api
-const api = 'http://localhost:5678/api/';
+/* -----
+ DOM
+* ------- */
+
+// creer les balise button dans la div
+let divtri = document.getElementById('tri');
 // recuperer l'emplacement de la gallery dans DOM
 const gallery = document.querySelector('.gallery');
+
+/* -----
+ VARIABLES
+* ------- */
 // vider la galery
 gallery.innerHTML = '';
+// connextion a l'api
+const api = 'http://localhost:5678/api/';
+
+/* -----
+ FUNCTIONS
+* ------- */
+
+function init() {
+  getProjects().then((projects)=> {
+    createGallery(projects)
+  });
+  getCategories().then((categories) => {
+    generateFiltersInHTML(categories)
+  })
+}
 
 // recuperrer les donners de l'api
 async function getProjects() {
   const reponse = await fetch(api + 'works');
-  const projects = await reponse.json();
-  createGallery(projects);
+  return await reponse.json();
 }
+
+async function getCategories() {
+  const reponse = await fetch(api + 'categories');
+  return await reponse.json();
+}
+
 // remettre les image dans la galery
-function createGallery(projects, id = null) {
+function createGallery(projects, filter = 0 ) {
+  gallery.innerHTML = '';
   for (let i = 0; i < projects.length; i++) {
-    if (projects[i].categoryId === id || id == null) {
+    if (projects[i].categoryId === filter || filter === 0) {
       let html = ` <figure>
             <img src="${projects[i].imageUrl}" alt="${projects[i].title}" />
             <figcaption>${projects[i].title}</figcaption>
@@ -23,45 +52,25 @@ function createGallery(projects, id = null) {
     }
   }
 }
-getProjects();
-// creer un tableau pour les boutons trie
-const tri = ['Tous', 'Objets', 'Appartements', 'Hotels & restaurants'];
-// creer les balise button dans la div
-let divtri = document.getElementById('tri');
 
-for (let i = 0; i < tri.length; i++) {
-  let balisebuttonTri = document.createElement('button');
-  divtri.appendChild(balisebuttonTri);
-}
-
-// recuperer la liste des button et leur mettre leur contenu
-
-let listebutton = document.querySelectorAll('#tri button');
-for (let i = 0; i < listebutton.length; i++) {
-  listebutton[i].textContent = tri[i];
-  listebutton[i].class = tri[i];
-  listebutton[i].id = i;
-}
-// trier la gallery
-async function getTri() {
-  const reponse = await fetch(api + 'works');
-  const projects = await reponse.json();
-
-  for (let i = 0; i < listebutton.length; i++) {
-    listebutton[i].addEventListener('click', function () {
-      if (i !== 0) {
-        gallery.innerHTML = '';
-
-        createGallery(projects, (id = i));
-      } else {
-        gallery.innerHTML = '';
-        getProjects();
-      }
-
-      console.log(createGallery);
+function generateFiltersInHTML(categories) {
+  categories.unshift({id: 0, name: 'Tous'});
+  categories.forEach((category) => {
+    let categoryButton = document.createElement('button');
+    categoryButton.innerHTML = category.name;
+    categoryButton.addEventListener('click', function() {
+      getProjects().then((projects)=> {
+        createGallery(projects, category.id);
+      });
     });
-  }
+    divtri.appendChild(categoryButton);
+  })
 }
-getTri();
+
+/* -----
+ INIT
+* ------- */
+init()
+
 
 // Authentification de l’utilisateur
