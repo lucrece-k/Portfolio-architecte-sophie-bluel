@@ -310,7 +310,53 @@ footer nav ul {
   justify-content: flex-end;
   margin: 2em;
 }
+/* modal */
 
+aside {
+  display: none;
+  position: absolute;
+  top: 64%;
+  left: 21%;
+  background-color: white;
+  width: 60%;
+  height: 91%;
+  border-radius: 10px;
+}
+aside p {
+  text-align: center;
+  margin: 60px 219px 41px 220px;
+  font-size: 26px;
+  font-family: 'Work Sans';
+}
+.croix-quitter {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 20px 0 0;
+}
+.contenu-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal-gallery {
+  display: flex;
+  justify-content: center;
+}
+.trai-modal {
+  border: 1px solid #b3b3b3;
+  width: 54%;
+}
+aside button {
+  background-color: #1d6154;
+  color: white;
+  font-size: 14px;
+  border: none;
+  padding: 10px 49px 9px 49px;
+  border-radius: 60px;
+  margin-top: 38px;
+}
 /* ***********************************media queries tablette **************************************************/
 @media (max-width: 1024px) {
   header {
@@ -319,12 +365,24 @@ footer nav ul {
   #introduction {
     margin-right: 60px;
   }
+  #portefolio {
+    margin: 0 30px;
+  }
   .gallery {
     grid-template-columns: 1fr 1fr;
   }
 }
 /* ***********************************media queries mobile ****************************************************/
 @media (max-width: 767px) {
+  aside p {
+    margin: 0;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  aside button {
+    font-size: 13;
+    padding: 10px;
+  }
   header {
     flex-direction: column;
     align-items: center;
@@ -341,12 +399,18 @@ footer nav ul {
   }
   #tri {
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
   }
   #tri button {
     margin: 0;
   }
+  #portefolio {
+    margin: 0 30px;
+  }
   .gallery {
     grid-template-columns: 1fr;
+  }
+  #contact {
+    margin-top: 50px;
   }
 }

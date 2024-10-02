@@ -11,22 +11,9 @@ const gallery = document.querySelector('.gallery');
  VARIABLES
 * ------- */
 // vider la galery
-gallery.innerHTML = '';
+// gallery.innerHTML = '';
 // connextion a l'api
 const api = 'http://localhost:5678/api/';
-
-/* -----
- FUNCTIONS
-* ------- */
-
-function init() {
-  getProjects().then((projects)=> {
-    createGallery(projects)
-  });
-  getCategories().then((categories) => {
-    generateFiltersInHTML(categories)
-  })
-}
 
 // recuperrer les donners de l'api
 async function getProjects() {
@@ -39,8 +26,21 @@ async function getCategories() {
   return await reponse.json();
 }
 
+/* -----
+ FUNCTIONS
+* ------- */
+
+function init() {
+  getProjects().then((projects) => {
+    createGallery(projects);
+  });
+  getCategories().then((categories) => {
+    generateFiltersInHTML(categories);
+  });
+}
+
 // remettre les image dans la galery
-function createGallery(projects, filter = 0 ) {
+function createGallery(projects, filter = 0) {
   gallery.innerHTML = '';
   for (let i = 0; i < projects.length; i++) {
     if (projects[i].categoryId === filter || filter === 0) {
@@ -54,23 +54,45 @@ function createGallery(projects, filter = 0 ) {
 }
 
 function generateFiltersInHTML(categories) {
-  categories.unshift({id: 0, name: 'Tous'});
+  categories.unshift({ id: 0, name: 'Tous' });
   categories.forEach((category) => {
     let categoryButton = document.createElement('button');
     categoryButton.innerHTML = category.name;
-    categoryButton.addEventListener('click', function() {
-      getProjects().then((projects)=> {
+    categoryButton.addEventListener('click', function () {
+      getProjects().then((projects) => {
         createGallery(projects, category.id);
       });
     });
     divtri.appendChild(categoryButton);
-  })
+  });
 }
 
 /* -----
  INIT
 * ------- */
-init()
-
+init();
 
 // Authentification de l’utilisateur
+
+// empecher que la page se recharge
+const form = document.querySelector('form');
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  // recuperer l'email taper par l'utilisateur et le verifier
+  let balisEmail = document.getElementById('email');
+  let email = balisEmail.value;
+  if (email !== 'sophie.bluel@test.tld') {
+    alert('email faut');
+  } else {
+    window.location = 'index.html';
+  }
+  // recuperer le mot de passe taper par l'utilisateur et le verifier
+  let baliseMotDePasse = document.getElementById('mot-de-passe');
+  let motDePasse = baliseMotDePasse.value;
+  if (motDePasse !== 'S0phie') {
+    alert('mot de passe faut');
+  } else {
+    window.location = 'index.html';
+  }
+});
+// recuperer la valeur du champ email

@@ -27,7 +27,7 @@ h1 > span {
   letter-spacing: 0.1em;
 }
 header {
-  margin: 50px 150px 150px 150px;
+  margin: 50px 150px 0px 150px;
 }
 
 nav ul {
@@ -52,6 +52,7 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 300px;
 }
 form p {
   color: #1d6154;
@@ -80,6 +81,10 @@ input {
   border: none;
   padding: 7px;
 }
+.no-valid {
+  box-shadow: 0px 4px 14px 0px rgba(248, 2, 2, 0.712);
+  /* background-color: red; */
+}
 button {
   background-color: #1d6154;
   color: white;
@@ -96,10 +101,6 @@ button {
   font-weight: 500;
 }
 
-footer {
-  margin-top: 355px;
-}
-
 footer nav ul {
   display: flex;
   justify-content: flex-end;
@@ -111,4 +112,34 @@ footer li {
   font-family: 'Work Sans';
   font-size: 14px;
   font-weight: 300;
+}
+/* **************************************media queries tablette ********************************/
+@media (max-width: 1024px) {
+  header {
+    margin: 50px 50px 0 50px;
+  }
+  form {
+    margin-bottom: 187px;
+  }
+  footer nav ul {
+    margin: 0;
+    margin-right: 50px;
+  }
+}
+/* **************************************media queries mobile ********************************/
+@media (max-width: 767px) {
+  header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+  form {
+    margin-bottom: 30px;
+  }
+
+  footer nav ul {
+    margin: 0;
+    padding-bottom: 5px;
+  }
 }
