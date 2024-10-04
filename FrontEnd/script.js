@@ -37,6 +37,9 @@ function init() {
   getCategories().then((categories) => {
     generateFiltersInHTML(categories);
   });
+  getProjects().then((projects) => {
+    createGalleryModal(projects);
+  });
 }
 
 // remettre les image dans la galery
@@ -67,32 +70,19 @@ function generateFiltersInHTML(categories) {
   });
 }
 
+// modal
+function createGalleryModal(projects, filter = 0) {
+  let galeryModal = document.getElementById('modal-gallery');
+  for (let i = 0; i < projects.length; i++) {
+    if (projects[i].categoryId === filter || filter === 0) {
+      let html = ` <figure>
+            <img src="${projects[i].imageUrl}" alt="${projects[i].title}" />
+          </figure>`;
+      galeryModal.innerHTML += html;
+    }
+  }
+}
 /* -----
  INIT
 * ------- */
 init();
-
-// Authentification de l’utilisateur
-
-// empecher que la page se recharge
-const form = document.querySelector('form');
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  // recuperer l'email taper par l'utilisateur et le verifier
-  let balisEmail = document.getElementById('email');
-  let email = balisEmail.value;
-  if (email !== 'sophie.bluel@test.tld') {
-    alert('email faut');
-  } else {
-    window.location = 'index.html';
-  }
-  // recuperer le mot de passe taper par l'utilisateur et le verifier
-  let baliseMotDePasse = document.getElementById('mot-de-passe');
-  let motDePasse = baliseMotDePasse.value;
-  if (motDePasse !== 'S0phie') {
-    alert('mot de passe faut');
-  } else {
-    window.location = 'index.html';
-  }
-});
-// recuperer la valeur du champ email

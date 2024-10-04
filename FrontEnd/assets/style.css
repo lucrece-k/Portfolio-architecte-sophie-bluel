@@ -311,29 +311,34 @@ footer nav ul {
   margin: 2em;
 }
 /* modal */
-
+body {
+  background: rgba(0, 0, 0, 0.3);
+}
 aside {
-  display: none;
   position: absolute;
-  top: 64%;
-  left: 21%;
+  top: 87%;
+  left: 22%;
   background-color: white;
-  width: 60%;
-  height: 91%;
+  width: 57%;
+  height: 118%;
   border-radius: 10px;
+}
+#modal-1 {
+  z-index: 1;
 }
 aside p {
   text-align: center;
-  margin: 60px 219px 41px 220px;
+  margin: 25px 217px 34px 217px;
   font-size: 26px;
   font-family: 'Work Sans';
 }
+
 .croix-quitter {
   display: flex;
   justify-content: flex-end;
   padding: 20px 20px 0 0;
 }
-.contenu-modal {
+.contenu-modal-1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -341,12 +346,32 @@ aside p {
 }
 
 #modal-gallery {
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+  grid-row-gap: 15px;
+  width: 78%;
 }
-.trai-modal {
+#modal-gallery img {
+  width: 92%;
+  height: 79%;
+}
+#modal-gallery figure {
+  position: relative;
+}
+#modal-gallery figure::before {
+  position: absolute;
+  content: url(../assets/icons/trash-can-solid.png);
+  background-color: black;
+  top: 10px;
+  right: 15px;
+  padding: 0 3px;
+}
+.trait-modal-1 {
   border: 1px solid #b3b3b3;
   width: 54%;
+  margin-top: 48px;
 }
 aside button {
   background-color: #1d6154;
@@ -356,7 +381,118 @@ aside button {
   padding: 10px 49px 9px 49px;
   border-radius: 60px;
   margin-top: 38px;
+  margin-bottom: 45px;
 }
+.modal-button-1:active #modal-2 {
+  z-index: 3;
+}
+
+#contenu-modal-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.fleche-croix {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.fleche-gauche {
+  display: flex;
+  padding: 20px 0 0 20px;
+}
+
+/* .fleche-gauche:active #modal-1 {
+} */
+#contenu-modal-2 {
+  margin: 0 105px;
+}
+.input-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 30px;
+  margin-bottom: 47px;
+  width: 100%;
+  padding: 0 5px;
+}
+.input-label input,
+select {
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+  padding: 10px;
+  border: none;
+}
+.input-label input {
+  width: 96%;
+}
+.input-label label {
+  color: #3d3d3d;
+
+  font-family: 'Work Sans';
+  font-size: 14px;
+  font-weight: 500;
+}
+.input-label label[for='categorie'] {
+  margin-top: 21px;
+}
+.input-label select {
+  width: 100%;
+}
+.chargement-contenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8f1f6;
+  width: 100%;
+  padding: 0 5px;
+}
+
+.chargement-contenu svg {
+  width: 76px;
+  height: 76px;
+}
+.chargement-contenu button {
+  font-family: 'Work Sans';
+  color: #306685;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #cbd6dc;
+  padding: 10px 33px;
+  margin-top: 6px;
+}
+.chargement-contenu p {
+  font-family: 'Work Sans';
+  font-size: 10px;
+  color: #444;
+  margin: 7px 154px 19px 154px;
+}
+.modal-button-2 {
+  background-color: #a7a7a7;
+  color: #fff;
+  font-family: Syne;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#modal-2 .trait-modal-2 {
+  border: 1px solid #b3b3b3;
+  width: 100%;
+}
+.modal-2-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 55px;
+}
+.croix-quitter:active #modal-1,
+#modal-2 {
+  display: none;
+}
+
 /* ***********************************media queries tablette **************************************************/
 @media (max-width: 1024px) {
   header {
