@@ -69,7 +69,19 @@ function generateFiltersInHTML(categories) {
     divtri.appendChild(categoryButton);
   });
 }
+// au click du lien 'ouverture de la boite modal' le modal 1 devient visible
+let lienModal1 = document.getElementById('lien-modal-1');
+let body = document.querySelector('body');
+let modal1 = document.getElementById('modal-1');
+let modal2 = document.getElementById('modal-2');
 
+lienModal1.addEventListener('click', () => {
+  body.classList.add('background-assombri');
+  modal1.classList.remove('hidden');
+  modal1.classList.add('modal-visible');
+
+  console.log(modal1);
+});
 // modal
 function createGalleryModal(projects, filter = 0) {
   let galeryModal = document.getElementById('modal-gallery');
@@ -82,6 +94,55 @@ function createGalleryModal(projects, filter = 0) {
     }
   }
 }
+
+// au click sur le bouton ajouter une photo le modal 1 laise place au modal 2
+let ajouterPhoto = document.querySelector('.modal-button-1');
+ajouterPhoto.addEventListener('click', () => {
+  modal2.classList.add('z-index');
+  modal2.classList.add('modal-visible');
+  modal2.classList.remove('hidden');
+  console.log(modal2);
+});
+
+// au click sur la flèche on repart sur le modal 1
+let flecheGauche = document.querySelector('.fleche-gauche');
+flecheGauche.addEventListener('click', () => {
+  modal2.classList.remove('z-index');
+  modal1.classList.add('z-index');
+});
+// au click sur la croix les module disparese
+let croixQuitter = document.querySelector('.croix-quitter');
+croixQuitter.addEventListener('click', () => {
+  modal1.classList.remove('modal-visible');
+  modal1.classList.add('hidden');
+  modal2.classList.remove('modal-visible');
+  modal2.classList.add('hidden');
+  body.classList.remove('background-assombri');
+});
+let croixQuitter2 = document.querySelector('.croix-quitter-2');
+croixQuitter2.addEventListener('click', () => {
+  modal1.classList.remove('modal-visible');
+  modal1.classList.add('hidden');
+  modal2.classList.remove('modal-visible');
+  modal2.classList.add('hidden');
+  body.classList.remove('background-assombri');
+});
+
+// ajout des categorie dans le modal 2
+let baliseCategorie = document.querySelectorAll('option');
+baliseCategorie.forEach((category) => {
+  baliseCategorie.innerHTML = category.name;
+  getCategories();
+  console.log(baliseCategorie);
+});
+
+// let baliseCategorie = document.querySelectorAll('option');
+// for (let i = 0; i < baliseCategorie.length; i++) {
+//   baliseCategorie[i].textContent += 'tous';
+//   console.log(getCategories(id));
+//   getCategories();
+// }
+
 /* -----
  INIT
 * ------- */

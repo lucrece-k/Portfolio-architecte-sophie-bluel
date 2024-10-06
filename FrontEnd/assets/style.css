@@ -311,8 +311,17 @@ footer nav ul {
   margin: 2em;
 }
 /* modal */
-body {
+.background-assombri {
   background: rgba(0, 0, 0, 0.3);
+}
+.modal-visible {
+  visibility: visible;
+}
+.hidden {
+  visibility: hidden;
+}
+.z-index {
+  z-index: 1;
 }
 aside {
   position: absolute;
@@ -320,15 +329,15 @@ aside {
   left: 22%;
   background-color: white;
   width: 57%;
-  height: 118%;
+  height: 107%;
   border-radius: 10px;
 }
-#modal-1 {
+/* #modal-1 {
   z-index: 1;
-}
+} */
 aside p {
   text-align: center;
-  margin: 25px 217px 34px 217px;
+  margin: 10px 217px 46px 217px;
   font-size: 26px;
   font-family: 'Work Sans';
 }
@@ -346,32 +355,33 @@ aside p {
 }
 
 #modal-gallery {
-  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0fr 0fr 0fr 0fr 1fr;
 
-  grid-row-gap: 15px;
-  width: 78%;
+  grid-row-gap: 25px;
+  grid-column-gap: 9px;
 }
 #modal-gallery img {
-  width: 92%;
-  height: 79%;
+  width: 78.123px;
+  height: 104.08px;
 }
 #modal-gallery figure {
   position: relative;
+  width: 78.123px;
+  height: 104.08px;
 }
 #modal-gallery figure::before {
   position: absolute;
   content: url(../assets/icons/trash-can-solid.png);
   background-color: black;
-  top: 10px;
-  right: 15px;
+  top: 5px;
+  right: 5px;
   padding: 0 3px;
 }
 .trait-modal-1 {
   border: 1px solid #b3b3b3;
   width: 54%;
-  margin-top: 48px;
+  margin-top: 67px;
 }
 aside button {
   background-color: #1d6154;
@@ -383,17 +393,21 @@ aside button {
   margin-top: 38px;
   margin-bottom: 45px;
 }
-.modal-button-1:active #modal-2 {
+/* #modal-2 {
+  
+} */
+/* .modal-button-1:active #modal-2 {
   z-index: 3;
-}
+} */
 
 #contenu-modal-2 {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
+  margin: 0 105px;
 }
-.fleche-croix {
+.fleche-croix-2 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -405,9 +419,7 @@ aside button {
 
 /* .fleche-gauche:active #modal-1 {
 } */
-#contenu-modal-2 {
-  margin: 0 105px;
-}
+
 .input-label {
   display: flex;
   flex-direction: column;
@@ -439,7 +451,7 @@ select {
   margin-top: 21px;
 }
 .input-label select {
-  width: 100%;
+  width: 99%;
 }
 .chargement-contenu {
   display: flex;
@@ -448,7 +460,6 @@ select {
   align-items: center;
   background-color: #e8f1f6;
   width: 100%;
-  padding: 0 5px;
 }
 
 .chargement-contenu svg {
@@ -488,10 +499,10 @@ select {
   align-items: center;
   margin-bottom: 55px;
 }
-.croix-quitter:active #modal-1,
+/* .croix-quitter:active #modal-1,
 #modal-2 {
   display: none;
-}
+} */
 
 /* ***********************************media queries tablette **************************************************/
 @media (max-width: 1024px) {

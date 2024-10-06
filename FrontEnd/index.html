@@ -15,8 +15,8 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <a href="#modal-1">Ouvrir la boite modale</a>
-    <aside id="modal-1" class="modal" aria-hidden="true" role="dialog">
+    <a id="lien-modal-1" href="#modal-1">Ouvrir la boite modale</a>
+    <aside id="modal-1" class="hidden" role="dialog">
       <div class="croix-quitter">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -42,8 +42,8 @@
         </div>
       </div>
     </aside>
-    <aside id="modal-2" class="modal" aria-hidden="true" role="dialog">
-      <div class="fleche-croix">
+    <aside id="modal-2" class="hidden z-index" role="dialog">
+      <div class="fleche-croix-2">
         <a href="#modal-1">
           <svg
             class="fleche-gauche"
@@ -60,7 +60,7 @@
           </svg>
         </a>
         <svg
-          class="croix-quitter"
+          class="croix-quitter croix-quitter-2"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
