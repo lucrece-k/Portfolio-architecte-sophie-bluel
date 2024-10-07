@@ -131,14 +131,15 @@ croixQuitter2.addEventListener('click', () => {
   body.classList.remove('background-assombri');
 });
 
-// // Au click en dehors du modal il quitte
-// body.addEventListener('click', () => {
-//   modal1.classList.remove('modal-visible');
-//   modal1.classList.add('hidden');
-//   modal2.classList.remove('modal-visible');
-//   modal2.classList.add('hidden');
-//   body.classList.remove('background-assombri');
-// });
+// Au click en dehors du modal il quitte
+let sectionMain = document.getElementById('main');
+sectionMain.addEventListener('click', () => {
+  modal1.classList.remove('modal-visible');
+  modal1.classList.add('hidden');
+  modal2.classList.remove('modal-visible');
+  modal2.classList.add('hidden');
+  body.classList.remove('background-assombri');
+});
 
 // ajout des categorie dans le modal 2
 // let baliseCategorie = document.querySelectorAll('option');
