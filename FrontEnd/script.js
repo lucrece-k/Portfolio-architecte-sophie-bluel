@@ -40,6 +40,9 @@ function init() {
   getProjects().then((projects) => {
     createGalleryModal(projects);
   });
+  getCategories().then((categories) => {
+    generateCategorieInHTML(categories);
+  });
 }
 
 // remettre les image dans la galery
@@ -69,7 +72,7 @@ function generateFiltersInHTML(categories) {
     divtri.appendChild(categoryButton);
   });
 }
-// au click du lien 'ouverture de la boite modal' le modal 1 devient visible
+// au click du lien 'modifier' le modal 1 devient visible
 let lienModal1 = document.getElementById('lien-modal-1');
 let body = document.querySelector('body');
 let modal1 = document.getElementById('modal-1');
@@ -107,10 +110,10 @@ ajouterPhoto.addEventListener('click', () => {
 // au click sur la flèche on repart sur le modal 1
 let flecheGauche = document.querySelector('.fleche-gauche');
 flecheGauche.addEventListener('click', () => {
-  modal2.classList.remove('z-index');
-  modal1.classList.add('z-index');
+  modal2.classList.remove('modal-visible');
+  modal2.classList.add('hidden');
 });
-// au click sur la croix les module disparese
+// au click sur la croix les module quitte
 let croixQuitter = document.querySelector('.croix-quitter');
 croixQuitter.addEventListener('click', () => {
   modal1.classList.remove('modal-visible');
@@ -128,18 +131,34 @@ croixQuitter2.addEventListener('click', () => {
   body.classList.remove('background-assombri');
 });
 
-// ajout des categorie dans le modal 2
-let baliseCategorie = document.querySelectorAll('option');
-baliseCategorie.forEach((category) => {
-  baliseCategorie.innerHTML = category.name;
-  getCategories();
-  console.log(baliseCategorie);
-});
+// // Au click en dehors du modal il quitte
+// body.addEventListener('click', () => {
+//   modal1.classList.remove('modal-visible');
+//   modal1.classList.add('hidden');
+//   modal2.classList.remove('modal-visible');
+//   modal2.classList.add('hidden');
+//   body.classList.remove('background-assombri');
+// });
 
+// ajout des categorie dans le modal 2
+// let baliseCategorie = document.querySelectorAll('option');
+// getCategories(category);
+// baliseCategorie.forEach((category) => {
+//   baliseCategorie.innerHTML = category.name;
+
+//   console.log(baliseCategorie);
+// });
+
+function generateCategorieInHTML(categories) {
+  let baliseCategorie = document.querySelectorAll('option');
+  for (let i = 0; i < baliseCategorie.length; i++) {
+    baliseCategorie[i].innerHTML = categories.name;
+  }
+}
 // let baliseCategorie = document.querySelectorAll('option');
 // for (let i = 0; i < baliseCategorie.length; i++) {
-//   baliseCategorie[i].textContent += 'tous';
-//   console.log(getCategories(id));
+//   baliseCategorie[i].textContent += categories.name;
+
 //   getCategories();
 // }
 
