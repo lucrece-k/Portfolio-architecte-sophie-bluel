@@ -1,71 +1,60 @@
 // Authentification de l’utilisateur
 // variable globale
-let balisEmail = document.getElementById('email');
-let email = balisEmail.value;
+let baliseEmail = document.getElementById('email');
 let baliseMotDePasse = document.getElementById('mot-de-passe');
-let motDePasse = baliseMotDePasse.value;
 let erreur = document.getElementById('erreur-email-mdp');
+const form = document.querySelector('form');
 
-// function
-function verifierChamp(champ, valeurAttendu) {
-  // si le champ est different de se qui est attendu
+const API_LOGIN_PATH = 'http://localhost:5678/api/users/login';
 
-  if (champ.value !== valeurAttendu) {
-    erreur.textContent = ' Email et/ou mot de passe invalide';
-    throw new Error(erreur);
-  } else {
-    window.location = 'index.html';
-  }
+// INIT FUNCTION
 
-  // if (email !== 'sophie.bluel@test.tld' && motDePasse !== 'S0phie') {
-  //   erreur.textContent = ' Email et mot de passe invalide';
-  //   throw new Error(erreur);
-  // }
+function init() {
+  addListenerOnSubmit()
 }
-// function verifierLesDeuxChamp(champ, valeurAttendu) {
-//   if (champ !== valeurAttendu && champ !== valeurAttendu) {
-//     let erreur = document.getElementById('erreur-email-mdp');
-//     erreur.textContent = ' Email et mot de passe invalide';
-//     throw new Error(erreur);
-//   } else {
-//     window.location = 'index.html';
-//   }
-// }
 
-let form = document.querySelector('form');
-form.addEventListener('submit', (event) => {
-  try {
+function addListenerOnSubmit() {
+  form.addEventListener('submit', (event) => {
     event.preventDefault();
-    verifierChamp(balisEmail, 'sophie.bluel@test.tld');
-    verifierChamp(baliseMotDePasse, 'S0phie');
-  } catch (Error) {}
-});
+    erreur.innerHTML = '';
+    verifierChamp(baliseEmail);
+    verifierChamp(baliseMotDePasse);
 
-// // empecher que la page se recharge
-// const form = document.querySelector('form');
-// form.addEventListener('submit', (event) => {
-//   event.preventDefault();
-//   // recuperer l'email taper par l'utilisateur et le verifier
+    if(verifierChamp(baliseMotDePasse) &&     verifierChamp(baliseEmail)) {
+      const user = {
+        email: baliseEmail.value,
+        password: baliseMotDePasse.value
+      }
 
-//   let email = balisEmail.value;
+      sendLoginRequest(JSON.stringify(user)).then((response)=> {
+        if(response.token) {
+          /*Stocker le token dans le nvaigateur */
+          window.location = 'index.html'
+        } else {
+          erreur.innerHTML = 'Utilisateur inconnu ou identifants invalides'
+        }
+      })
+    }
+  });
+}
 
-//   if (email !== 'sophie.bluel@test.tld') {
-//     let erreur = document.getElementById('erreur-email-mdp');
-//     erreur.textContent = 'Email incorrecte';
-//   }
-//   // recuperer le mot de passe taper par l'utilisateur et le verifier
+function verifierChamp(champ) {
+  // si le champ est different de se qui est attendu
+  console.log(champ.value)
+  if (champ.value === '') {
+    erreur.innerHTML = ' Email et/ou mot de passe invalide';
+    return false;
+  }
+  return true;
+}
 
-//   let motDePasse = baliseMotDePasse.value;
-//   if (motDePasse !== 'S0phie') {
-//     let erreur = document.getElementById('erreur-email-mdp');
-//     erreur.textContent = 'Mot de passe incorrecte';
-//   }
-//   if (email !== 'sophie.bluel@test.tld' && motDePasse !== 'S0phie') {
-//     let erreur = document.getElementById('erreur-email-mdp');
-//     erreur.textContent = 'email et mot de passe incorrecte';
-//   }
-//   if (email === 'sophie.bluel@test.tld' && motDePasse === 'S0phie') {
-//     window.location = 'index.html';
-//   }
-// });
-// // recuperer la valeur du champ email
+async function sendLoginRequest(user) {
+  return await fetch(API_LOGIN_PATH, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: user,
+  }).then((res) => res.json())
+}
+
+
+init();

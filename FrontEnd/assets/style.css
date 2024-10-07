@@ -263,11 +263,13 @@ li:hover {
 .gallery img {
   width: 100%;
 }
-#contact {
+#contact,
+#login {
   width: 50%;
   margin: auto;
 }
-#contact > * {
+#contact > *,
+#login > * {
   text-align: center;
 }
 #contact h2 {

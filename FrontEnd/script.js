@@ -6,6 +6,8 @@
 let divtri = document.getElementById('tri');
 // recuperer l'emplacement de la gallery dans DOM
 const gallery = document.querySelector('.gallery');
+let _TOKEN = '';
+
 
 /* -----
  VARIABLES
@@ -26,6 +28,11 @@ async function getCategories() {
   return await reponse.json();
 }
 
+function getToken() {
+  /* Fonction pour r&cupérer le tocken dans le navigateur et le stokcer dans la vairable _TOKEN */
+  _TOKEN = 'zkjebfkjzbekfjb';
+}
+
 /* -----
  FUNCTIONS
 * ------- */
@@ -33,16 +40,24 @@ async function getCategories() {
 function init() {
   getProjects().then((projects) => {
     createGallery(projects);
+
+    if(_TOKEN.length !== 0) {
+      createGalleryModal(projects);
+    }
   });
   getCategories().then((categories) => {
     generateFiltersInHTML(categories);
+
+    if(_TOKEN.length !== 0) {
+      generateCategorieInHTML(categories);
+    }
   });
-  getProjects().then((projects) => {
-    createGalleryModal(projects);
-  });
-  getCategories().then((categories) => {
-    generateCategorieInHTML(categories);
-  });
+
+  if(_TOKEN.length !== 0) {
+    displayAdminElement();
+  }
+
+
 }
 
 // remettre les image dans la galery
@@ -86,17 +101,7 @@ lienModal1.addEventListener('click', () => {
   console.log(modal1);
 });
 // modal
-function createGalleryModal(projects, filter = 0) {
-  let galeryModal = document.getElementById('modal-gallery');
-  for (let i = 0; i < projects.length; i++) {
-    if (projects[i].categoryId === filter || filter === 0) {
-      let html = ` <figure>
-            <img src="${projects[i].imageUrl}" alt="${projects[i].title}" />
-          </figure>`;
-      galeryModal.innerHTML += html;
-    }
-  }
-}
+g
 
 // au click sur le bouton ajouter une photo le modal 1 laise place au modal 2
 let ajouterPhoto = document.querySelector('.modal-button-1');
@@ -166,4 +171,5 @@ function generateCategorieInHTML(categories) {
 /* -----
  INIT
 * ------- */
+getToken();
 init();
