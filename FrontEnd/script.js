@@ -8,7 +8,6 @@ let divtri = document.getElementById('tri');
 const gallery = document.querySelector('.gallery');
 let _TOKEN = '';
 
-
 /* -----
  VARIABLES
 * ------- */
@@ -41,23 +40,21 @@ function init() {
   getProjects().then((projects) => {
     createGallery(projects);
 
-    if(_TOKEN.length !== 0) {
+    if (_TOKEN.length !== 0) {
       createGalleryModal(projects);
     }
   });
   getCategories().then((categories) => {
     generateFiltersInHTML(categories);
 
-    if(_TOKEN.length !== 0) {
+    if (_TOKEN.length !== 0) {
       generateCategorieInHTML(categories);
     }
   });
 
-  if(_TOKEN.length !== 0) {
+  if (_TOKEN.length !== 0) {
     displayAdminElement();
   }
-
-
 }
 
 // remettre les image dans la galery
@@ -87,6 +84,11 @@ function generateFiltersInHTML(categories) {
     divtri.appendChild(categoryButton);
   });
 }
+// redirection vers la page login au click
+let lienLogin = document.getElementById('login');
+lienLogin.addEventListener('click', () => {
+  window.location = 'login.html';
+});
 // au click du lien 'modifier' le modal 1 devient visible
 let lienModal1 = document.getElementById('lien-modal-1');
 let body = document.querySelector('body');
@@ -101,12 +103,10 @@ lienModal1.addEventListener('click', () => {
   console.log(modal1);
 });
 // modal
-g
 
 // au click sur le bouton ajouter une photo le modal 1 laise place au modal 2
 let ajouterPhoto = document.querySelector('.modal-button-1');
 ajouterPhoto.addEventListener('click', () => {
-  modal2.classList.add('z-index');
   modal2.classList.add('modal-visible');
   modal2.classList.remove('hidden');
   console.log(modal2);

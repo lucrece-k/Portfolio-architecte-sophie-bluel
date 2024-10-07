@@ -312,6 +312,42 @@ footer nav ul {
   justify-content: flex-end;
   margin: 2em;
 }
+.mdp-oublie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mdp-oublie a {
+  color: #3d3d3d;
+  font-family: 'Work Sans';
+  font-size: 14px;
+  font-weight: 500;
+}
+.banniere-noir {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  padding-top: 19.5px;
+  padding-bottom: 20.5px;
+}
+.visibility-hidden {
+  visibility: hidden;
+}
+/* titre mes projets et modifier */
+.projet-et-modifier {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 31px;
+}
+.modifier {
+  display: flex;
+  gap: 10.4px;
+  margin-bottom: 30px;
+}
 /* modal */
 .background-assombri {
   background: rgba(0, 0, 0, 0.3);
