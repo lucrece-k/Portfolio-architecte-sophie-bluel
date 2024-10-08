@@ -336,6 +336,9 @@ footer nav ul {
 .visibility-hidden {
   visibility: hidden;
 }
+.visibility-visible {
+  visibility: visible;
+}
 /* titre mes projets et modifier */
 .projet-et-modifier {
   display: flex;
@@ -349,9 +352,7 @@ footer nav ul {
   margin-bottom: 30px;
 }
 /* modal */
-.background-assombri {
-  background: rgba(0, 0, 0, 0.3);
-}
+
 .modal-visible {
   visibility: visible;
 }
@@ -361,17 +362,22 @@ footer nav ul {
 
 aside {
   position: absolute;
-  top: 87%;
+  top: 0;
   left: 22%;
   background-color: white;
   width: 57%;
-  height: 107%;
+  height: 100%;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-aside p {
+aside h3 {
   text-align: center;
-  margin: 10px 217px 46px 217px;
+  margin-top: 10px;
+  margin-bottom: 46px;
   font-size: 26px;
   font-family: 'Work Sans';
 }
@@ -379,7 +385,8 @@ aside p {
 .croix-quitter {
   display: flex;
   justify-content: flex-end;
-  padding: 20px 20px 0 0;
+  align-items: flex-end;
+  padding: 71px 20px 0 0;
 }
 .contenu-modal-1 {
   display: flex;
@@ -388,23 +395,23 @@ aside p {
   align-items: center;
 }
 
-#modal-gallery {
+.modal-gallery {
   display: grid;
   grid-template-columns: 0fr 0fr 0fr 0fr 1fr;
 
   grid-row-gap: 25px;
   grid-column-gap: 9px;
 }
-#modal-gallery img {
+.modal-gallery img {
   width: 78.123px;
   height: 104.08px;
 }
-#modal-gallery figure {
+.modal-gallery figure {
   position: relative;
   width: 78.123px;
   height: 104.08px;
 }
-#modal-gallery figure::before {
+.modal-gallery figure::before {
   position: absolute;
   content: url(../assets/icons/trash-can-solid.png);
   background-color: black;
@@ -412,9 +419,9 @@ aside p {
   right: 5px;
   padding: 0 3px;
 }
-.trait-modal-1 {
+.trait {
   border: 1px solid #b3b3b3;
-  width: 54%;
+  width: 100%;
   margin-top: 67px;
 }
 aside button {
@@ -440,12 +447,13 @@ aside button {
   align-items: flex-start;
   margin: 0 105px;
 }
-.fleche-croix-2 {
+.fleche-croix {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
 }
-.fleche-gauche {
+.fleche {
   display: flex;
   padding: 20px 0 0 20px;
 }

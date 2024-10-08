@@ -29,6 +29,7 @@ function addListenerOnSubmit() {
       sendLoginRequest(JSON.stringify(user)).then((response) => {
         if (response.token) {
           /*Stocker le token dans le nvaigateur */
+          window.localStorage.setItem(user, response);
           window.location = 'index.html';
         } else {
           erreur.innerHTML = 'Utilisateur inconnu ou identifants invalides';
