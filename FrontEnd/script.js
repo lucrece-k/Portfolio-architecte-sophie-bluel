@@ -6,8 +6,7 @@
 let divtri = document.getElementById('tri');
 // recuperer l'emplacement de la gallery dans DOM
 const gallery = document.querySelector('.gallery');
-let _TOKEN = '';
-console.log(_TOKEN);
+
 /* -----
  VARIABLES
 * ------- */
@@ -27,20 +26,24 @@ async function getCategories() {
   return await reponse.json();
 }
 
-function getToken() {
+async function getToken() {
   /* Fonction pour r&cupérer le tocken dans le navigateur et le stokcer dans la vairable _TOKEN */
-  _TOKEN = window.localStorage.getItem('token');
+
+  // const response = await fetch(apiLogin);
+  // return response.json;
+  window.localStorage.getItem('token');
 }
 
 /* -----
  FUNCTIONS
 * ------- */
-
+let token = getToken();
+console.log(token);
 function init() {
   getProjects().then((projects) => {
     createGallery(projects);
 
-    if (_TOKEN.length !== 0) {
+    if (token.length !== 0) {
       createGalleryModal(projects);
     }
   });
@@ -52,9 +55,11 @@ function init() {
     //   }
   });
   getToken();
-  if (_TOKEN.length !== 0) {
+  if (token.length !== 0) {
     displayAdminElement();
   }
+
+  supprimerProjet();
 }
 
 // remettre les image dans la galery
@@ -93,18 +98,59 @@ function displayAdminElement() {
   baliseModifier.classList.remove('visibility-hidden');
 }
 // creer la gallery sur le modal
-function createGalleryModal(projects) {
+async function createGalleryModal() {
   let baliseModalGallery = document.getElementById('modal_content');
-  for (let i = 0; i < projects.length; i++) {
-    if (projects[i]) {
-      let html = ` <figure>
-            <img src="${projects[i].imageUrl}" alt="${projects[i].title}" />
-            
-          </figure>`;
-      baliseModalGallery.innerHTML += html;
-    }
-  }
+  const projectsModal = await getProjects();
+  projectsModal.forEach((projects) => {
+    const figure = document.createElement('figure');
+    const img = document.createElement('img');
+    const span = document.createElement('span');
+    img.src = projects.imageUrl;
+    span.id = projects.id;
+    span.className = 'span-poubelle';
+    figure.appendChild(img);
+    figure.appendChild(span);
+    baliseModalGallery.appendChild(figure);
+  });
 }
+
+// fonction pour suprimer un projet de la gallery
+
+function supprimerProjet() {
+  let listeDesPoubelles = document.querySelectorAll('.span-poubelle');
+  listeDesPoubelles.forEach((poubelle) => {
+    poubelle.addEventListener('click', () => {
+      console.log('poubelle localiser');
+      const id = poubelle.id;
+      const init = {
+        method: 'DELETE',
+        header: { 'content-type': 'application/json' },
+      };
+      fetch(api + 'works/' + id, init).then(async (response) => {
+        if (!response.ok) {
+          console.log('supression a echoue');
+        }
+        const data = await response.json();
+        console.log('supression reussi voisi les' + data);
+        createGalleryModal();
+        createGallery();
+      });
+    });
+  });
+}
+
+// function createGalleryModal(projects) {
+//   let baliseModalGallery = document.getElementById('modal_content');
+//   for (let i = 0; i < projects.length; i++) {
+//     if (projects[i]) {
+//       let html = ` <figure>
+//             <img src="${projects[i].imageUrl}" alt="${projects[i].title}" />
+//             <span></span>
+//           </figure>`;
+//       baliseModalGallery.innerHTML += html;
+//     }
+//   }
+// }
 
 // redirection vers la page login au click
 let lienLogin = document.getElementById('login');
@@ -115,58 +161,29 @@ lienLogin.addEventListener('click', () => {
 // au click du lien 'modifier' le modal et sont overlay devient visible
 let lienModal = document.querySelector('.modifier');
 let body = document.querySelector('body');
-let modal = document.getElementById('modal_overlay');
+let overlay = document.getElementById('modal_overlay');
+let modal = document.getElementById('modal');
 
 lienModal.addEventListener('click', () => {
+  overlay.classList.remove('visibility-hidden');
   modal.classList.remove('visibility-hidden');
   let titreModal = document.querySelector('.titre');
   titreModal.innerHTML = 'Galerie photo';
   let buttonAction = document.querySelector('.button-action');
   buttonAction.innerHTML = 'Ajouter une photo';
 });
-// // modal
-
-// // au click sur le bouton ajouter une photo le modal 1 laise place au modal 2
-// let ajouterPhoto = document.querySelector('.modal-button-1');
-// ajouterPhoto.addEventListener('click', () => {
-//   modal2.classList.add('modal-visible');
-//   modal2.classList.remove('hidden');
-//   console.log(modal2);
-// });
-
-// // au click sur la flèche on repart sur le modal 1
-// let flecheGauche = document.querySelector('.fleche-gauche');
-// flecheGauche.addEventListener('click', () => {
-//   modal2.classList.remove('modal-visible');
-//   modal2.classList.add('hidden');
-// });
-// // au click sur la croix les module quitte
-// let croixQuitter = document.querySelector('.croix-quitter');
-// croixQuitter.addEventListener('click', () => {
-//   modal1.classList.remove('modal-visible');
-//   modal1.classList.add('hidden');
-//   modal2.classList.remove('modal-visible');
-//   modal2.classList.add('hidden');
-//   body.classList.remove('background-assombri');
-// });
-// let croixQuitter2 = document.querySelector('.croix-quitter-2');
-// croixQuitter2.addEventListener('click', () => {
-//   modal1.classList.remove('modal-visible');
-//   modal1.classList.add('hidden');
-//   modal2.classList.remove('modal-visible');
-//   modal2.classList.add('hidden');
-//   body.classList.remove('background-assombri');
-// });
-
-// // Au click en dehors du modal il quitte
-// let sectionMain = document.getElementById('main');
-// sectionMain.addEventListener('click', () => {
-//   modal1.classList.remove('modal-visible');
-//   modal1.classList.add('hidden');
-//   modal2.classList.remove('modal-visible');
-//   modal2.classList.add('hidden');
-//   body.classList.remove('background-assombri');
-// });
+// // au click sur la croix le module quitte
+let croixQuitter = document.querySelector('.croix-quitter');
+croixQuitter.addEventListener('click', () => {
+  modal.classList.add('visibility-hidden');
+  overlay.classList.add('visibility-hidden');
+});
+// au click sur le overlay le modal quitte
+let overlayQuitter = document.getElementById('modal_overlay');
+overlayQuitter.addEventListener('click', () => {
+  overlay.classList.add('visibility-hidden');
+  modal.classList.add('visibility-hidden');
+});
 
 // // ajout des categorie dans le modal 2
 // // let baliseCategorie = document.querySelectorAll('option');

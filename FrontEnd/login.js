@@ -5,7 +5,7 @@ let baliseMotDePasse = document.getElementById('mot-de-passe');
 let erreur = document.getElementById('erreur-email-mdp');
 const form = document.querySelector('form');
 
-const API_LOGIN_PATH = 'http://localhost:5678/api/users/login';
+const apiLogin = 'http://localhost:5678/api/users/login';
 
 // INIT FUNCTION
 
@@ -29,10 +29,11 @@ function addListenerOnSubmit() {
       sendLoginRequest(JSON.stringify(user)).then((response) => {
         if (response.token) {
           /*Stocker le token dans le nvaigateur */
-          window.localStorage.setItem(user, response);
+          window.localStorage.setItem(response.token);
+          console.log(response);
           window.location = 'index.html';
         } else {
-          erreur.innerHTML = 'Utilisateur inconnu ou identifants invalides';
+          erreur.innerHTML = response.message;
         }
       });
     }
