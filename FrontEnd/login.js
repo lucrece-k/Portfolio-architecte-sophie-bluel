@@ -5,7 +5,7 @@ let baliseMotDePasse = document.getElementById('mot-de-passe');
 let erreur = document.getElementById('erreur-email-mdp');
 const form = document.querySelector('form');
 
-const apiLogin = 'http://localhost:5678/api/users/login';
+ const apiLogin = 'http://localhost:5678/api/users/login';
 
 // INIT FUNCTION
 
@@ -13,7 +13,7 @@ function init() {
   addListenerOnSubmit();
 }
 
-function addListenerOnSubmit() {
+  function addListenerOnSubmit() {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     erreur.innerHTML = '';
@@ -27,21 +27,22 @@ function addListenerOnSubmit() {
       };
 
       sendLoginRequest(JSON.stringify(user)).then((response) => {
-        if (response.token) {
+       console.log(response.token)
+        if (response.token!=="") {
           /*Stocker le token dans le nvaigateur */
-          window.localStorage.setItem(response.token);
-          console.log(response);
+          localStorage.setItem("token",response.token);
+          
           window.location = 'index.html';
         } else {
-          erreur.innerHTML = response.message;
+          erreur.innerHTML = "Utilisateur unconnu";
         }
       });
     }
   });
 }
-
+ 
 function verifierChamp(champ) {
-  // si le champ est different de se qui est attendu
+  // si le champ est vide 
   console.log(champ.value);
   if (champ.value === '') {
     erreur.innerHTML = ' Email et/ou mot de passe invalide';
@@ -50,12 +51,12 @@ function verifierChamp(champ) {
   return true;
 }
 
-async function sendLoginRequest(user) {
-  return await fetch(API_LOGIN_PATH, {
+ async function sendLoginRequest(user) {
+  return await fetch(apiLogin, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: user,
-  }).then((res) => res.json());
+  }).then((response) => response.json());
 }
 
 init();
