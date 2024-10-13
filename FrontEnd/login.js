@@ -31,8 +31,8 @@ function init() {
         if (response.token!=="") {
           /*Stocker le token dans le nvaigateur */
           localStorage.setItem("token",response.token);
-          
           window.location = 'index.html';
+
         } else {
           erreur.innerHTML = "Utilisateur unconnu";
         }
