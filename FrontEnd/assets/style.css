@@ -120,7 +120,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
+  content: "";
   content: none;
 }
 table {
@@ -131,7 +131,7 @@ table {
 body {
   max-width: 1140px;
   margin: auto;
-  font-family: 'Work Sans';
+  font-family: "Work Sans";
   font-size: 14px;
 }
 header {
@@ -146,20 +146,20 @@ section {
 h1 {
   display: flex;
   flex-direction: column;
-  font-family: 'Syne';
+  font-family: "Syne";
   font-size: 22px;
   font-weight: 800;
   color: #b1663c;
 }
 
 h1 > span {
-  font-family: 'Work Sans';
+  font-family: "Work Sans";
   font-size: 10px;
   letter-spacing: 0.1em;
 }
 
 h2 {
-  font-family: 'Syne';
+  font-family: "Syne";
   font-weight: 700;
   font-size: 30px;
   color: #1d6154;
@@ -225,7 +225,7 @@ li:hover {
   margin-top: 18px;
   font-size: 16px;
   font-weight: 700;
-  font-family: 'Syne';
+  font-family: "Syne";
 }
 #tri button:first-child {
   padding-right: 30px;
@@ -296,8 +296,8 @@ li:hover {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type='submit'] {
-  font-family: 'Syne';
+input[type="submit"] {
+  font-family: "Syne";
   font-weight: 700;
   color: white;
   background-color: #1d6154;
@@ -319,7 +319,7 @@ footer nav ul {
 }
 .mdp-oublie a {
   color: #3d3d3d;
-  font-family: 'Work Sans';
+  font-family: "Work Sans";
   font-size: 14px;
   font-weight: 500;
 }
@@ -388,7 +388,7 @@ aside h3 {
   margin-top: 10px;
   margin-bottom: 20px;
   font-size: 26px;
-  font-family: 'Work Sans';
+  font-family: "Work Sans";
 }
 
 .croix-quitter {
@@ -397,14 +397,13 @@ aside h3 {
   align-items: flex-end;
 }
 
-
 .modal-gallery {
   display: flex;
-   justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 25px 9px;
-    margin: 0 35px;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px 9px;
+  margin: 0 35px;
 }
 .modal-gallery img {
   width: 78.123px;
@@ -438,37 +437,50 @@ aside button {
   margin-top: 26px;
   margin-bottom: 25px;
 }
-.ajout-photo{
-  background-color: #CBD6DC;
-  color: #306685;
-}
 
- #contenu-modal-2 {
+#contenu-modal-2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #E8F1F6;
+
   width: 100%;
 }
-.contenu-telechargement{
-  padding: 20px;
+.form-ajout-photo {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
+  background-color: #e8f1f6;
+}
+.form-ajout-photo input {
+  display: none;
+}
+#nouveau-projet {
+  display: none;
+  max-width: 100%;
+  height: auto;
+}
+.form-ajout-photo button {
+  font-family: "Work Sans";
+  color: #306685;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #cbd6dc;
+  padding: 10px 33px;
+  margin-top: 6px;
+  border-radius: 50px;
 }
 .fleche-croix {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 95%;
-margin-top: 6px;
+  margin-top: 6px;
 }
 .fleche {
   display: flex;
-  
 }
 
 .input-paragraphe {
@@ -493,7 +505,7 @@ select {
 }
 .input-paragraphe p {
   color: #3d3d3d;
-  font-family: 'Work Sans';
+  font-family: "Work Sans";
   font-size: 14px;
   font-weight: 500;
   margin: 0;
@@ -504,51 +516,17 @@ select {
 .input-paragraphe select {
   width: 99%;
 }
-.chargement-contenu {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #e8f1f6;
-  width: 100%;
-}
 
-.chargement-contenu svg {
+.form-ajout-photo svg {
   width: 76px;
   height: 76px;
 }
-.chargement-contenu button {
-  font-family: 'Work Sans';
-  color: #306685;
-  font-size: 14px;
-  font-weight: 500;
-  background-color: #cbd6dc;
-  padding: 10px 33px;
-  margin-top: 6px;
-}
-.chargement-contenu p {
-  font-family: 'Work Sans';
+
+.form-ajout-photo p {
+  font-family: "Work Sans";
   font-size: 10px;
   color: #444;
   margin: 7px 154px 19px 154px;
-}
-.modal-button-2 {
-  background-color: #a7a7a7;
-  color: #fff;
-  font-family: Syne;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-#modal-2 .trait-modal-2 {
-  border: 1px solid #b3b3b3;
-  width: 100%;
-}
-.modal-2-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 55px;
 }
 
 /* ***********************************media queries tablette **************************************************/
