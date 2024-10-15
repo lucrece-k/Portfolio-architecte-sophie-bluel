@@ -85,13 +85,9 @@ function init() {
     }
   });
   fermerModal();
-  // getCategories().then((categories) => {
-  //   generateFiltersInHTML(categories);
-
-  // if (token.length !== 0) {
-  //   generateCategorieInHTML(categories);
-  // }
-  // });
+  getCategories().then((categories) => {
+    generateFiltersInHTML(categories);
+  });
 }
 
 // remettre les image dans la galery
@@ -109,7 +105,16 @@ function createGallery(projects, filter = 0) {
 }
 
 function generateFiltersInHTML(categories) {
-  categories.unshift({ id: 0, name: "Tous" });
+  //categories.unshift({ id: 0, name: "Tous" });
+  let categoryButton = document.createElement("button");
+  categoryButton.innerHTML = "Tous";
+  categoryButton.addEventListener("click", function () {
+    getProjects().then((projects) => {
+      createGallery(projects, 0);
+    });
+  });
+  divtri.appendChild(categoryButton);
+
   categories.forEach((category) => {
     let categoryButton = document.createElement("button");
     categoryButton.innerHTML = category.name;
@@ -227,17 +232,14 @@ buttonAction.addEventListener("click", () => {
   </svg>
   <img id="nouveau-projet"/>
   <input type="file" id="file" name="file">
-  <button onclick="file.click()" id="fileButton" class="button-ajouter-photo">+ Ajouter photo</button>
+ <button onclick="file.click()" id="fileButton" class="button-ajouter-photo">+ Ajouter photo</button>
   <p>jpg, png : 4mo max</p>
 </form>
 <div class="input-paragraphe">
 Titre<br>
 <input type="text" name="titre" id="titre" />
 Catégorie<br>
-<select name="Catégorie" id="Catégorie">
-<option value=""></option>
-  <option value=""></option>
-  <option value=""></option>
+<select name="categorie-select" id="categorie-select">
 </select>
 </div>
 </div>`;
@@ -258,11 +260,11 @@ Catégorie<br>
     event.stopPropagation(); // Empêche la propagation de l'événement de clic
   });
   getCategories().then((categories) => {
-    generateFiltersInHTML(categories);
+    // generateFiltersInHTML(categories);
 
-    // if (token.length !== 0) {
-    //   generateCategorieInHTML(categories);
-    // }
+    if (token.length !== 0) {
+      generateCategorieInHTML(categories);
+    }
     telechargerNouveauProjet();
   });
 });
@@ -271,10 +273,13 @@ function telechargerNouveauProjet() {
   const fileInput = document.getElementById("file");
   const fileButton = document.getElementById("fileButton");
   const nouveauProjet = document.getElementById("nouveau-projet");
+  fileButton.addEventListener("click", (event) => {
+    event.preventDefault(); // Empêche la soumission par défaut
+    fileInput.click(); // Déclenche la sélection de fichier
+  });
   // Affichage de l'image quand le fichier est sélectionné
-  fileButton.addEventListener("change", (event) => {
-    event.preventDefault();
-    const file = fileButton.files[0];
+  fileInput.addEventListener("change", (event) => {
+    const file = fileInput.files[0];
 
     if (file) {
       const reader = new FileReader();
@@ -286,58 +291,18 @@ function telechargerNouveauProjet() {
 
       reader.readAsDataURL(file); // Lire le fichier et générer une URL
     }
-    let modalContent = document.querySelector("#contenu-modal-2"); // Contenu du modal
-    modalContent.addEventListener("click", (event) => {
-      event.stopPropagation(); // Empêche la propagation de l'événement de clic
-    });
   });
 }
 
-// empecher la modal de se fermer au click sur +ajouter photo
-// const buttonAjouterPhoto = document.querySelector(".form-ajout-photo button");
-// buttonAjouterPhoto.addEventListener("click", () => {
-//   modal.classList.remove("visibility-hidden");
-// });
-
-// ajout des categorie dans le modal 2
-// let baliseCategorie = document.querySelectorAll('option');
-// getCategories(category);
-// baliseCategorie.forEach((category) => {
-//   baliseCategorie.innerHTML = category.name;
-
-//   console.log(baliseCategorie);
-// });
-
 function generateCategorieInHTML(categories) {
-  let baliseCategorie = document.querySelectorAll("option");
-  for (let i = 0; i < baliseCategorie.length; i++) {
-    baliseCategorie.value = categories.name;
-    baliseCategorie[i].innerHTML += categories.name;
-  }
+  const select = document.getElementById("categorie-select");
+  categories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category.id;
+    option.textContent = category.name;
+    select.appendChild(option);
+  });
 }
-
-// function generateCategorieInHTML(categories) {
-//   let choixCategorie = document.getElementById("Catégorie");
-
-//   // // Supprimer toutes les options existantes
-//   // choixCategorie.innerHTML = '';
-
-//   // Créer les nouvelles options à partir de la liste des catégories
-//   categories.forEach(category => {
-//     let option = document.createElement("option");
-//     option.value = category.name; // Ou toute autre propriété pour identifier la catégorie
-//     option.innerHTML = category.name;
-//     choixCategorie.appendChild(option);
-//   });
-// }
-
-// let baliseCategorie = document.querySelectorAll('option');
-// for (let i = 0; i < baliseCategorie.length; i++) {
-//   baliseCategorie[i].textContent += categories.name;
-
-//   getCategories();
-// }
-
 // /* -----
 //  INIT
 // * ------- */
