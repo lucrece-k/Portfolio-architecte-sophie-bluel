@@ -333,6 +333,9 @@ footer nav ul {
   padding-top: 19.5px;
   padding-bottom: 20.5px;
 }
+.display-none {
+  display: none;
+}
 .visibility-hidden {
   visibility: hidden;
 }
@@ -422,10 +425,14 @@ aside h3 {
   right: 5px;
   padding: 0 3px;
 }
-.trait {
+.trait,
+.trait-ajout-photo {
   border: 1px solid #b3b3b3;
   width: 88%;
   margin-top: 21px;
+}
+.background-color-submit {
+  background-color: #a7a7a7;
 }
 aside button {
   background-color: #1d6154;
@@ -443,7 +450,6 @@ aside button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   width: 100%;
 }
 .form-ajout-photo {
@@ -451,10 +457,19 @@ aside button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.contenu-ajout-photo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   background-color: #e8f1f6;
 }
-.form-ajout-photo input {
+.contenu-ajout-photo img {
+  margin-top: 10px;
+}
+.contenu-ajout-photo input {
   display: none;
 }
 #nouveau-projet {
@@ -462,7 +477,7 @@ aside button {
   max-width: 100%;
   height: auto;
 }
-.form-ajout-photo button {
+.contenu-ajout-photo button {
   font-family: "Work Sans";
   color: #306685;
   font-size: 14px;
@@ -517,12 +532,12 @@ select {
   width: 99%;
 }
 
-.form-ajout-photo svg {
+.contenu-ajout-photo svg {
   width: 76px;
   height: 76px;
 }
 
-.form-ajout-photo p {
+.contenu-ajout-photo p {
   font-family: "Work Sans";
   font-size: 10px;
   color: #444;
