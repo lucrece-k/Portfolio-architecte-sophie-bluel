@@ -407,6 +407,7 @@ aside h3 {
   flex-wrap: wrap;
   gap: 25px 9px;
   margin: 0 35px;
+  width: 86%;
 }
 .modal-gallery img {
   width: 78.123px;
@@ -457,6 +458,7 @@ aside button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 80%;
 }
 .contenu-ajout-photo {
   display: flex;
@@ -467,7 +469,7 @@ aside button {
   background-color: #e8f1f6;
 }
 .contenu-ajout-photo img {
-  margin-top: 10px;
+  margin: 10px;
 }
 .contenu-ajout-photo input {
   display: none;
@@ -477,7 +479,7 @@ aside button {
   max-width: 100%;
   height: auto;
 }
-.contenu-ajout-photo button {
+.contenu-ajout-photo label {
   font-family: "Work Sans";
   color: #306685;
   font-size: 14px;
@@ -518,16 +520,14 @@ select {
 .input-paragraphe input {
   width: 96%;
 }
-.input-paragraphe p {
+.input-paragraphe label {
   color: #3d3d3d;
   font-family: "Work Sans";
   font-size: 14px;
   font-weight: 500;
   margin: 0;
 }
-.input-paragraphe + p {
-  margin-top: 21px;
-}
+
 .input-paragraphe select {
   width: 99%;
 }
@@ -541,7 +541,7 @@ select {
   font-family: "Work Sans";
   font-size: 10px;
   color: #444;
-  margin: 7px 154px 19px 154px;
+  margin: 7px 124px 19px 124px;
 }
 
 /* ***********************************media queries tablette **************************************************/
