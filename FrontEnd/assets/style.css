@@ -172,6 +172,7 @@ nav ul {
 nav li {
   padding: 0 10px;
   font-size: 1.2em;
+  cursor: pointer;
 }
 li a {
   text-decoration: none;
@@ -226,6 +227,7 @@ li:hover {
   font-size: 16px;
   font-weight: 700;
   font-family: "Syne";
+  cursor: pointer;
 }
 #tri button:first-child {
   padding-right: 30px;
@@ -353,6 +355,7 @@ footer nav ul {
   display: flex;
   gap: 10.4px;
   margin-bottom: 30px;
+  cursor: pointer;
 }
 /* modal */
 
@@ -376,10 +379,10 @@ footer nav ul {
 aside {
   position: fixed;
   left: 22%;
-  top: 0;
-  bottom: 0;
+  bottom: 13px;
   background-color: white;
   width: 57%;
+  height: 95%;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -389,7 +392,7 @@ aside {
 aside h3 {
   text-align: center;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 46px;
   font-size: 26px;
   font-family: "Work Sans";
 }
@@ -407,7 +410,7 @@ aside h3 {
   flex-wrap: wrap;
   gap: 25px 9px;
   margin: 0 35px;
-  width: 86%;
+  width: 76%;
 }
 .modal-gallery img {
   width: 78.123px;
@@ -429,8 +432,16 @@ aside h3 {
 .trait,
 .trait-ajout-photo {
   border: 1px solid #b3b3b3;
+}
+.trait {
+  margin-top: 67.3px;
+  margin-bottom: 38px;
   width: 88%;
-  margin-top: 21px;
+}
+.trait-ajout-photo {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 .background-color-submit {
   background-color: #a7a7a7;
@@ -442,8 +453,8 @@ aside button {
   border: none;
   padding: 10px 49px 9px 49px;
   border-radius: 60px;
-  margin-top: 26px;
-  margin-bottom: 25px;
+  margin-bottom: 45px;
+  cursor: pointer;
 }
 
 #contenu-modal-2 {
@@ -468,16 +479,15 @@ aside button {
   width: 100%;
   background-color: #e8f1f6;
 }
-.contenu-ajout-photo img {
-  margin: 10px;
-}
+
 .contenu-ajout-photo input {
   display: none;
 }
 #nouveau-projet {
   display: none;
-  max-width: 100%;
-  height: auto;
+  /* max-width: 100%;
+  height: auto; */
+  margin: 10px;
 }
 .contenu-ajout-photo label {
   font-family: "Work Sans";
@@ -494,10 +504,7 @@ aside button {
   flex-direction: row;
   justify-content: space-between;
   width: 95%;
-  margin-top: 6px;
-}
-.fleche {
-  display: flex;
+  margin: 26px 30px 0 30px;
 }
 
 .input-paragraphe {

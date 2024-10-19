@@ -275,6 +275,7 @@ function modalDeTelechargement() {
       buttonAction.innerHTML = "Ajouter une photo";
       titreModal.innerHTML = "Galerie photo";
       flecheRetour.classList.add("visibility-hidden");
+      trait.classList.remove("visibility-hidden");
     });
 
     getCategories().then((categories) => {
@@ -314,30 +315,6 @@ function telechargerNouveauProjet() {
       reader.readAsDataURL(file);
     }
   });
-  // function createNouveauProjet() {
-  //   const formAjoutPhoto = document.querySelector(".form-ajout-photo");
-  //   const formData = new FormData(formAjoutPhoto);
-  //   formAjoutPhoto.addEventListener("submit", (e) => {
-  //     e.preventDefault();
-  //     for (let pair of formData.entries()) {
-  //       console.log(`${pair[0]}: ${pair[1]}`);
-  //     }
-
-  //     // Envoyer le formdata a l'api
-  //     fetch(api + "works", {
-  //       method: "POST",
-  //       headers: { Authorization: `Bearer ${token}` },
-  //       body: formData,
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log("Réponse du serveur:", data);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Erreur lors de l'envoi du formulaire:", error);
-  //       });
-  //   });
-  // }
 
   function createNouveauProjet() {
     const formAjoutPhoto = document.querySelector(".form-ajout-photo");
@@ -374,7 +351,8 @@ function telechargerNouveauProjet() {
       fetch(api + "works", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: formData, // Envoie les données sous forme multipart
       })
