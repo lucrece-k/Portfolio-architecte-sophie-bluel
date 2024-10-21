@@ -51,6 +51,7 @@ function logout() {
 
 // recuperer le token stocker dans le localstorage
 const token = localStorage.getItem("token");
+console.log(localStorage.getItem("token"));
 /* Fonction pour verifier le token  */
 async function getToken() {
   // recuperer le token stocker dans le localstorage
@@ -69,13 +70,10 @@ async function getToken() {
 }
 getToken();
 
-// const token = getToken()
-
 /* -----
  FUNCTIONS
 * ------- */
 
-// console.log(token)
 function init() {
   getProjects().then((projects) => {
     createGallery(projects);
@@ -89,7 +87,6 @@ function init() {
     generateFiltersInHTML(categories);
   });
   modalDeTelechargement();
-  // changerCouleurSubmit();
 }
 
 // remettre les image dans la galery
@@ -107,7 +104,6 @@ function createGallery(projects, filter = 0) {
 }
 
 function generateFiltersInHTML(categories) {
-  //categories.unshift({ id: 0, name: "Tous" });
   let categoryButton = document.createElement("button");
   categoryButton.innerHTML = "Tous";
   categoryButton.addEventListener("click", function () {
@@ -173,9 +169,10 @@ function supprimerProjet() {
             return;
           }
           const updatedData = await updatedResponse.json();
+          // on vide les deux gallery et on leur passe les nouvelles données
           baliseModalGallery.innerHTML = "";
           gallery.innerHTML = "";
-          createGallery(updatedData); // Passez les données mises à jour à createGallery
+          createGallery(updatedData);
           createGalleryModal(updatedData);
         })
         .catch((error) => {
@@ -259,7 +256,7 @@ function modalDeTelechargement() {
     const inputCategorie = document.getElementById("categorie-select");
     const submitPhoto = document.querySelector(".submit-photo");
     submitPhoto.classList.add("background-color-submit");
-    // Changer le background du button submit quand le titre est écrit
+    // Changer le background du button submit quand le champ categorie est focus
     function changerCouleurSubmit() {
       inputCategorie.addEventListener("focus", () => {
         submitPhoto.classList.remove("background-color-submit");
@@ -336,9 +333,9 @@ function telechargerNouveauProjet() {
       }
 
       // Ajouter les champs au FormData
-      formData.append("image", fileInput.files[0]); // Ajoute le fichier
-      formData.append("title", titre.value); // Ajoute le titre
-      formData.append("category", categorie.value); // Ajoute la catégorie
+      formData.append("image", fileInput.files[0]);
+      formData.append("title", titre.value);
+      formData.append("category", categorie.value);
 
       // Vérifier ce qui est ajouté à formData
       for (let pair of formData.entries()) {
@@ -346,15 +343,14 @@ function telechargerNouveauProjet() {
       }
 
       // Ajouter le token d'authentification et envoyer la requête à l'API
-      const token = localStorage.getItem("token"); // Assurez-vous d'avoir le bon token
-
+      const token = localStorage.getItem("token");
+      console.log(token);
       fetch(api + "works", {
         method: "POST",
         headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: "Bearer " + token,
         },
-        body: formData, // Envoie les données sous forme multipart
+        body: formData,
       })
         .then((response) => {
           if (!response.ok) {
@@ -364,6 +360,8 @@ function telechargerNouveauProjet() {
         })
         .then((data) => {
           console.log("Réponse du serveur:", data);
+          createGallery();
+          createGalleryModal();
         })
 
         .catch((error) => {

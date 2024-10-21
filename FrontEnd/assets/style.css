@@ -133,6 +133,7 @@ body {
   margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
+  background: #fffef8;
 }
 header {
   display: flex;
@@ -344,6 +345,9 @@ footer nav ul {
 .visibility-visible {
   visibility: visible;
 }
+.caractere-gras {
+  font-weight: bold;
+}
 /* titre mes projets et modifier */
 .projet-et-modifier {
   display: flex;
@@ -387,6 +391,7 @@ aside {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
 }
 
 aside h3 {
@@ -565,6 +570,9 @@ select {
   .gallery {
     grid-template-columns: 1fr 1fr;
   }
+  .contenu-ajout-photo p {
+    margin: 7px 0px 19px 0px;
+  }
 }
 /* ***********************************media queries mobile ****************************************************/
 @media (max-width: 767px) {
@@ -603,6 +611,16 @@ select {
   }
   .gallery {
     grid-template-columns: 1fr;
+  }
+  .modal-gallery {
+    justify-content: center;
+  }
+  .contenu-ajout-photo label {
+    padding: 10px 11px;
+  }
+
+  .form-ajout-photo button {
+    padding: 10px 28px;
   }
   #contact {
     margin-top: 50px;
