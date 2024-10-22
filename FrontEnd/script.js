@@ -1,17 +1,8 @@
-/* -----
- DOM
-* ------- */
-
 // creer les balise button dans la div
 let divtri = document.getElementById("tri");
 // recuperer l'emplacement de la gallery dans DOM
 const gallery = document.querySelector(".gallery");
 
-/* -----
- VARIABLES
-* ------- */
-// vider la galery
-// gallery.innerHTML = '';
 // connextion a l'api
 const api = "http://localhost:5678/api/";
 
@@ -25,39 +16,40 @@ async function getCategories() {
   const reponse = await fetch(api + "categories");
   return await reponse.json();
 }
-
+let lienLogin = document.getElementById("login");
 let baliseBanniere = document.querySelector(".banniere-noir");
 let baliseModifier = document.querySelector(".modifier");
 function displayAdminElement() {
   baliseBanniere.classList.remove("visibility-hidden");
   baliseModifier.classList.remove("visibility-hidden");
+  lienLogin.innerText = "logout";
+  divtri.classList.add("visibility-hidden");
 }
 function remouveAdminElement() {
   baliseBanniere.classList.add("visibility-hidden");
   baliseModifier.classList.add("visibility-hidden");
 }
 function logout() {
-  const lienlogout = document.createElement("li");
-  lienlogout.classList.add("logout");
-  lienlogout.innerText = "logout";
-  const baliseParent = document.querySelector("header ul");
-  baliseParent.appendChild(lienlogout);
-  lienlogout.addEventListener("click", () => {
+  // Retire le eventlistener précédent
+  lienLogin.removeEventListener("click", displayLeLogin);
+  lienLogin.addEventListener("click", () => {
     remouveAdminElement();
-    lienlogout.classList.add("visibility-hidden");
-    console.log("lien logout");
+    lienLogin.innerText = "login";
+    // Supprime le token du localstorage
+    localStorage.removeItem("token");
+    // Recharge la page
+    window.location.reload();
   });
 }
+logout();
 
 // recuperer le token stocker dans le localstorage
 const token = localStorage.getItem("token");
 console.log(localStorage.getItem("token"));
 /* Fonction pour verifier le token  */
 async function getToken() {
-  // recuperer le token stocker dans le localstorage
   if (token.length !== 0) {
     displayAdminElement();
-    logout();
   }
   if (token) {
     console.log("Token récupéré:", token);
@@ -68,7 +60,6 @@ async function getToken() {
     return null;
   }
 }
-getToken();
 
 /* -----
  FUNCTIONS
@@ -77,7 +68,7 @@ getToken();
 function init() {
   getProjects().then((projects) => {
     createGallery(projects);
-
+    getToken();
     if (token.length !== 0) {
       createGalleryModal(projects);
     }
@@ -124,8 +115,18 @@ function generateFiltersInHTML(categories) {
     divtri.appendChild(categoryButton);
   });
 }
-
-let baliseModalGallery = document.querySelector(".modal_content");
+function displayAdminElement() {
+  baliseBanniere.classList.remove("visibility-hidden");
+  baliseModifier.classList.remove("visibility-hidden");
+  lienLogin.innerText = "logout";
+  divtri.classList.add("visibility-hidden");
+}
+function remouveAdminElement() {
+  baliseBanniere.classList.add("visibility-hidden");
+  baliseModifier.classList.add("visibility-hidden");
+}
+let baliseModalGallery = document.querySelector(".modal-gallery");
+let baliseContenuModal = document.querySelector(".contenu-modal");
 
 async function createGalleryModal() {
   const projectsModal = await getProjects();
@@ -183,12 +184,20 @@ function supprimerProjet() {
 }
 
 // redirection vers la page login au click
-let lienLogin = document.getElementById("login");
-lienLogin.addEventListener("click", () => {
-  window.location = "login.html";
-});
+function displayLeLogin() {
+  //  si l'utilisateur n'est pas connecté (pas de token)
+  if (!localStorage.getItem("token")) {
+    lienLogin.addEventListener("click", () => {
+      window.location = "login.html";
+    });
+  }
+}
 
-// variable global
+displayLeLogin();
+
+/* -----
+ VARIABLES global
+* ------- */
 const lienModal = document.querySelector(".modifier");
 const overlay = document.getElementById("modal_overlay");
 const modal = document.getElementById("modal");
@@ -201,30 +210,35 @@ const trait = document.querySelector(".trait");
 lienModal.addEventListener("click", () => {
   overlay.classList.remove("visibility-hidden");
   modal.classList.remove("visibility-hidden");
+  baliseModalGallery.classList.remove("display-none");
   titreModal.innerHTML = "Galerie photo";
   buttonAction.innerHTML = "Ajouter une photo";
 });
 
 function fermerModal() {
-  // // au click sur la croix le modal disparè
-  let croixQuitter = document.querySelector(".croix-quitter");
+  // // au click sur la croix le modal disparait
+  const croixQuitter = document.querySelector(".croix-quitter");
   croixQuitter.addEventListener("click", () => {
     modal.classList.add("visibility-hidden");
     overlay.classList.add("visibility-hidden");
   });
-  // au click sur le overlay le modal disparè
-  let overlayQuitter = document.getElementById("modal_overlay");
+  // au click sur le overlay le modal disparait
+  const overlayQuitter = document.getElementById("modal_overlay");
   overlayQuitter.addEventListener("click", () => {
     overlay.classList.add("visibility-hidden");
     modal.classList.add("visibility-hidden");
   });
 }
+function quitterModal() {
+  overlay.classList.add("visibility-hidden");
+  modal.classList.add("visibility-hidden");
+}
 
 // partie ajout photo de la modal au click sur ajouter une photo
 function modalDeTelechargement() {
   buttonAction.addEventListener("click", () => {
-    baliseModalGallery.innerHTML = "";
-    let html = `<div id="contenu-modal-2">
+    baliseModalGallery.classList.add("visibility-hidden");
+    let html = `
   <form action="#" class="form-ajout-photo">
   <div class="contenu-ajout-photo">
   <svg xmlns="http://www.w3.org/2000/svg" width="70" height="61" viewBox="0 0 70 61" fill="none">
@@ -245,10 +259,9 @@ function modalDeTelechargement() {
 <div class="trait-ajout-photo"></div>
 <button type="submit" class="submit-photo">Valider</button>
 </form>
-</div>
 `;
 
-    baliseModalGallery.innerHTML += html;
+    baliseContenuModal.innerHTML += html;
     flecheRetour.classList.remove("visibility-hidden");
     titreModal.innerHTML = "Ajout photo";
     buttonAction.classList.add("visibility-hidden");
@@ -263,8 +276,11 @@ function modalDeTelechargement() {
       });
     }
     changerCouleurSubmit();
+
     flecheRetour.addEventListener("click", () => {
       if (baliseModalGallery.children.length !== 0) {
+        baliseContenuModal.innerHTML = "";
+        baliseModalGallery.classList.remove("visibility-hidden");
         baliseModalGallery.innerHTML = "";
         createGalleryModal();
       }
@@ -360,8 +376,10 @@ function telechargerNouveauProjet() {
         })
         .then((data) => {
           console.log("Réponse du serveur:", data);
-          createGallery();
-          createGalleryModal();
+          getProjects().then((projects) => {
+            createGallery(projects);
+            quitterModal();
+          });
         })
 
         .catch((error) => {

@@ -5,6 +5,7 @@ let baliseMotDePasse = document.getElementById("mot-de-passe");
 let erreur = document.getElementById("erreur-email-mdp");
 const form = document.querySelector("form");
 const lienPageLogin = document.querySelector(".lien-page-login");
+console.log(lienPageLogin);
 
 const apiLogin = "http://localhost:5678/api/users/login";
 
