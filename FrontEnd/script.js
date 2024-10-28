@@ -51,14 +51,6 @@ async function getToken() {
   if (token && token.length !== 0) {
     displayAdminElement();
   }
-  // if (token) {
-  //   console.log("Token récupéré:", token);
-
-  //   return token;
-  // } else {
-  //   console.log("Aucun token trouvé");
-  //   return null;
-  // }
 }
 
 /* -----
