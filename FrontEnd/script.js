@@ -45,20 +45,20 @@ logout();
 
 // recuperer le token stocker dans le localstorage
 const token = localStorage.getItem("token");
-console.log(localStorage.getItem("token"));
+
 /* Fonction pour verifier le token  */
 async function getToken() {
-  if (token.length !== 0) {
+  if (token && token.length !== 0) {
     displayAdminElement();
   }
-  if (token) {
-    console.log("Token récupéré:", token);
+  // if (token) {
+  //   console.log("Token récupéré:", token);
 
-    return token;
-  } else {
-    console.log("Aucun token trouvé");
-    return null;
-  }
+  //   return token;
+  // } else {
+  //   console.log("Aucun token trouvé");
+  //   return null;
+  // }
 }
 
 /* -----
@@ -69,7 +69,7 @@ function init() {
   getProjects().then((projects) => {
     createGallery(projects);
     getToken();
-    if (token.length !== 0) {
+    if (token && token.length !== 0) {
       createGalleryModal(projects);
     }
   });
